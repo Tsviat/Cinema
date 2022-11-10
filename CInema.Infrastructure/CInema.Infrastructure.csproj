@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Cofiguration\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

@@ -8,9 +8,15 @@ namespace Cinema.Infrastructure.Constants
 {
     public static class DataValidation
     {
-        public static class Genre
-        {
-            public const int NameMaxLength = 20;
-        }
+
+        public const int GenreNameMaxLength = 20;
+        public const int ActorFirstNameMaxLength = 30;
+        public const int ActorLastNameMaxLength = 30;
+        public const int MovieNameMaxLength = 80;
+        public const int MovieImageUrlMaxLength = 100;
+        public const int DirectorNameMaxLength = 60;
+        public const int DescriptionMaxLength = 1000;
+        public const int HallNameMaxLength = 20;
+
     }
 }

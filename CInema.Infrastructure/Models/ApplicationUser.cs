@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CInema.Infrastructure.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        public bool IsAdmin { get; set; }
 
+        public IEnumerable<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }

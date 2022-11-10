@@ -1,10 +1,5 @@
 ﻿using Cinema.Infrastructure.Constants;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CInema.Infrastructure.Models
 {
@@ -14,7 +9,7 @@ namespace CInema.Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(DataValidation.Genre.NameMaxLength)]
+        [StringLength(DataValidation.GenreNameMaxLength)]
         public string Name { get; set; } = null!;
     }
 }
