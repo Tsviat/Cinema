@@ -23,6 +23,8 @@ namespace CInema.Infrastructure.Models
         [Required]
         public DateTime StartMovie { get; set; }
 
-        public IEnumerable<Seat> Seats { get; set; } = new List<Seat>();
+        IEnumerable<Reservation> Reservations { get; set; } = new List<Reservation>();
+
+        IEnumerable<ProjectionSeat> ProjectionSeats { get; set; } = new List<ProjectionSeat>();
     }
 }

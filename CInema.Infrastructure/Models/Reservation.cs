@@ -5,6 +5,12 @@ namespace CInema.Infrastructure.Models
 {
     public class Reservation
     {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public int NumberOfSeats { get; set; }
+
         [Required]
         public string ApplicationUserId { get; set; } = null!;
 
@@ -18,7 +24,6 @@ namespace CInema.Infrastructure.Models
         [Required]
         public Projection Projection { get; set; } = null!;
 
-        [Required]
-        public IEnumerable<Seat> Seats { get; set; } = new List<Seat>();
+        
     }
 }

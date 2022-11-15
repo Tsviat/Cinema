@@ -1,4 +1,5 @@
-﻿using CInema.Infrastructure.Models;
+﻿using CInema.Infrastructure.Data.Cofiguration;
+using CInema.Infrastructure.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,31 @@ namespace Cinema.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //builder.ApplyConfiguration(new HallConfiguration());
+            //builder.ApplyConfiguration(new SeatConfiguration());
+            builder.Entity<ProjectionSeat>()
+                .HasOne(r => r.Reservation)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<ProjectionSeat>()
+                .HasOne(p => p.Projection)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+                
+                
+
+
+            builder.Entity<ActorMovie>()
+                .HasKey(am => new { am.ActorId, am.MovieId });
+
+            //builder.Entity<Reservation>()
+            //    .HasKey(r => new { r.ApplicationUserId, r.ProjectionId });
+
+            
+
+
+
             base.OnModelCreating(builder);
         }
 
@@ -32,5 +58,7 @@ namespace Cinema.Infrastructure.Data
         public DbSet<Reservation> Reservations { get; set; } = null!;
 
         public DbSet<Seat> Seats { get; set; } = null!;
+
+        public DbSet<ProjectionSeat> ProjectionsSeats { get; set; } = null!;
     }
 }

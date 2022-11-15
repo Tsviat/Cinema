@@ -15,7 +15,7 @@ namespace CInema.Infrastructure.Models
         [Required]
         public int Capacity { get; set; }
 
-        public IEnumerable<Projection> Projections { get; set; } = new List<Projection>();
+        public Projection Projections { get; set; } = null!;
 
         public IEnumerable<Seat> Seats { get; set; } = new List<Seat>();
     }

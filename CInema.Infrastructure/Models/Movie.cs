@@ -9,8 +9,8 @@ namespace CInema.Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(DataValidation.MovieNameMaxLength)]
-        public string Name { get; set; } = null!;
+        [StringLength(DataValidation.MovieTitleMaxLength)]
+        public string Title { get; set; } = null!;
 
         [Required]
         [StringLength(DataValidation.DirectorNameMaxLength)]

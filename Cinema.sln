@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema", "Cinema\Cinema.csproj", "{0F6F307B-45AA-4F23-898D-191B53112DD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema", "Cinema\Cinema.csproj", "{0F6F307B-45AA-4F23-898D-191B53112DD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CInema.Infrastructure", "CInema.Infrastructure\CInema.Infrastructure.csproj", "{FCE03BF7-28A4-43B2-B252-229C87440D05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CInema.Infrastructure", "CInema.Infrastructure\CInema.Infrastructure.csproj", "{FCE03BF7-28A4-43B2-B252-229C87440D05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Core", "Cinema.Core\Cinema.Core.csproj", "{1475359B-C7AF-405C-A531-1E2BD9162146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Core", "Cinema.Core\Cinema.Core.csproj", "{1475359B-C7AF-405C-A531-1E2BD9162146}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

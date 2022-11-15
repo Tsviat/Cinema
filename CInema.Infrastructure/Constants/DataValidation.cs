@@ -12,7 +12,7 @@ namespace Cinema.Infrastructure.Constants
         public const int GenreNameMaxLength = 20;
         public const int ActorFirstNameMaxLength = 30;
         public const int ActorLastNameMaxLength = 30;
-        public const int MovieNameMaxLength = 80;
+        public const int MovieTitleMaxLength = 80;
         public const int MovieImageUrlMaxLength = 100;
         public const int DirectorNameMaxLength = 60;
         public const int DescriptionMaxLength = 1000;
