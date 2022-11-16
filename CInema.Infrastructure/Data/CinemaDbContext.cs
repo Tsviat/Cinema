@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class CinemaDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public CinemaDbContext(DbContextOptions<CinemaDbContext> options)
             : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.ApplyConfiguration(new HallConfiguration());
+            builder.ApplyConfiguration(new HallConfiguration());
             //builder.ApplyConfiguration(new SeatConfiguration());
             builder.Entity<ProjectionSeat>()
                 .HasOne(r => r.Reservation)
@@ -32,10 +32,7 @@ namespace Cinema.Infrastructure.Data
             builder.Entity<ActorMovie>()
                 .HasKey(am => new { am.ActorId, am.MovieId });
 
-            //builder.Entity<Reservation>()
-            //    .HasKey(r => new { r.ApplicationUserId, r.ProjectionId });
-
-            
+                  
 
 
 

@@ -26,7 +26,7 @@ namespace Cinema.Infrastructure.Data.Common
             return this.Context.Set<T>();
         }
 
-        public Repository(ApplicationDbContext context)
+        public Repository(CinemaDbContext context)
         {
             Context = context;
         }
