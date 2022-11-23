@@ -1,4 +1,7 @@
+using Cinema.Core.Contracts;
+using Cinema.Core.Services;
 using Cinema.Infrastructure.Data;
+using Cinema.Infrastructure.Data.Common;
 using CInema.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +24,15 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
     .AddEntityFrameworkStores<CinemaDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/User/Login";
+    option.LoginPath = "/User/Logout";
+});
+
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

@@ -1,5 +1,11 @@
 ﻿using Cinema.Infrastructure.Constants;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CInema.Infrastructure.Models
 {
@@ -25,11 +31,15 @@ namespace CInema.Infrastructure.Models
         public string ImageURL { get; set; } = null!;
 
         [Required]
+        public int ReleaseDate { get; set; }
+
+        [Required]
         public decimal Rating { get; set; }
 
-        public IEnumerable<Genre> Genres { get; set; } = new List<Genre>();
+        public int GenreId { get; set; }
 
-        public IEnumerable<ActorMovie> ActorMovies { get; set; } = new List<ActorMovie>();
+        [ForeignKey(nameof(GenreId))]
+        public Genre Genre { get; set; } = null!;
 
         public IEnumerable<Projection> Projections { get; set; } = new List<Projection>();
     }

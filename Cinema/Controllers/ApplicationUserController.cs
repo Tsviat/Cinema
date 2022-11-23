@@ -1,4 +1,4 @@
-﻿using Cinema.Models;
+﻿using Cinema.Core.Models.User;
 using CInema.Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -47,6 +47,8 @@ namespace Library.Controllers
             var user = new ApplicationUser()
             {
                 UserName = model.UserName,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Email = model.Email
             };
 

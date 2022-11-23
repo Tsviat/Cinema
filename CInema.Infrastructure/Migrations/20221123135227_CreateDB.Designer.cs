@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CInema.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    [Migration("20221115092255_CreateDB")]
+    [Migration("20221123135227_CreateDB")]
     partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,44 +23,6 @@ namespace CInema.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.ActorMovie", b =>
-                {
-                    b.Property<int>("ActorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActorId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("ActorsMovies");
-                });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.ApplicationUser", b =>
                 {
@@ -81,8 +43,15 @@ namespace CInema.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -138,17 +107,12 @@ namespace CInema.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.ToTable("Genres");
                 });
@@ -172,6 +136,26 @@ namespace CInema.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Halls");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 30,
+                            Name = "Small"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 50,
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 80,
+                            Name = "Large"
+                        });
                 });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Movie", b =>
@@ -192,6 +176,9 @@ namespace CInema.Infrastructure.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -200,12 +187,17 @@ namespace CInema.Infrastructure.Migrations
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ReleaseDate")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Movies");
                 });
@@ -453,30 +445,15 @@ namespace CInema.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CInema.Infrastructure.Models.ActorMovie", b =>
+            modelBuilder.Entity("CInema.Infrastructure.Models.Movie", b =>
                 {
-                    b.HasOne("CInema.Infrastructure.Models.Actor", "Actor")
-                        .WithMany("ActorMovies")
-                        .HasForeignKey("ActorId")
+                    b.HasOne("CInema.Infrastructure.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CInema.Infrastructure.Models.Movie", "Movie")
-                        .WithMany("ActorMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.Genre", b =>
-                {
-                    b.HasOne("CInema.Infrastructure.Models.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Projection", b =>
@@ -606,11 +583,6 @@ namespace CInema.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CInema.Infrastructure.Models.Actor", b =>
-                {
-                    b.Navigation("ActorMovies");
-                });
-
             modelBuilder.Entity("CInema.Infrastructure.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Reservations");
@@ -626,10 +598,6 @@ namespace CInema.Infrastructure.Migrations
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Movie", b =>
                 {
-                    b.Navigation("ActorMovies");
-
-                    b.Navigation("Genres");
-
                     b.Navigation("Projections");
                 });
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CInema.Infrastructure.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class CinemaDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,44 +21,6 @@ namespace CInema.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.ActorMovie", b =>
-                {
-                    b.Property<int>("ActorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActorId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("ActorsMovies");
-                });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.ApplicationUser", b =>
                 {
@@ -79,8 +41,15 @@ namespace CInema.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -136,9 +105,6 @@ namespace CInema.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -146,9 +112,59 @@ namespace CInema.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
-
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Comedy"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Drama"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Horror"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Romantic"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Crime"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Adventure"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Western"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Fantasy"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Sport"
+                        });
                 });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Hall", b =>
@@ -210,6 +226,9 @@ namespace CInema.Infrastructure.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -218,6 +237,9 @@ namespace CInema.Infrastructure.Migrations
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("ReleaseDate")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -225,7 +247,44 @@ namespace CInema.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GenreId");
+
                     b.ToTable("Movies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                            Director = "Frank Darabont",
+                            GenreId = 3,
+                            ImageURL = "https://flxt.tmsimg.com/assets/p15987_p_v8_ai.jpg",
+                            Rating = 9.3m,
+                            ReleaseDate = 1994,
+                            Title = "The Shawshank Redemption"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
+                            Director = "Francis Ford Coppola",
+                            GenreId = 6,
+                            ImageURL = "https://i.ytimg.com/vi/U8GdYixWfOc/movieposter_en.jpg",
+                            Rating = 9.2m,
+                            ReleaseDate = 1972,
+                            Title = "The Godfather"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
+                            Director = "Steven Spielberg",
+                            GenreId = 3,
+                            ImageURL = "https://www.uklfi.com/wp-content/uploads/2022/05/Schindlers-list.jpg",
+                            Rating = 9m,
+                            ReleaseDate = 1993,
+                            Title = "Schindler's List"
+                        });
                 });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Projection", b =>
@@ -471,30 +530,15 @@ namespace CInema.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CInema.Infrastructure.Models.ActorMovie", b =>
+            modelBuilder.Entity("CInema.Infrastructure.Models.Movie", b =>
                 {
-                    b.HasOne("CInema.Infrastructure.Models.Actor", "Actor")
-                        .WithMany("ActorMovies")
-                        .HasForeignKey("ActorId")
+                    b.HasOne("CInema.Infrastructure.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CInema.Infrastructure.Models.Movie", "Movie")
-                        .WithMany("ActorMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("CInema.Infrastructure.Models.Genre", b =>
-                {
-                    b.HasOne("CInema.Infrastructure.Models.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Projection", b =>
@@ -624,11 +668,6 @@ namespace CInema.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CInema.Infrastructure.Models.Actor", b =>
-                {
-                    b.Navigation("ActorMovies");
-                });
-
             modelBuilder.Entity("CInema.Infrastructure.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Reservations");
@@ -644,10 +683,6 @@ namespace CInema.Infrastructure.Migrations
 
             modelBuilder.Entity("CInema.Infrastructure.Models.Movie", b =>
                 {
-                    b.Navigation("ActorMovies");
-
-                    b.Navigation("Genres");
-
                     b.Navigation("Projections");
                 });
 

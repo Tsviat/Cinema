@@ -1,12 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Cinema.Infrastructure.Constants;
+using System.ComponentModel.DataAnnotations;
 
-namespace Cinema.Models
+namespace Cinema.Core.Models.User
 {
     public class RegisterViewModel
     {
         [Required]
         [StringLength(20, MinimumLength = 5)]
         public string UserName { get; set; } = null!;
+
+        [Required]
+        [StringLength(DataValidation.UserFirstNameMaxLength, MinimumLength = DataValidation.UserFirstNameMinLength)]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [StringLength(DataValidation.UserLastNameMaxLength, MinimumLength = DataValidation.UserLastNameMinLength)]
+        public string LastName { get; set; } = null!;
 
         [Required]
         [StringLength(60, MinimumLength = 10)]

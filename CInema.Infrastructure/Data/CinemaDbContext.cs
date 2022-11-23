@@ -15,7 +15,10 @@ namespace Cinema.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new HallConfiguration());
-            //builder.ApplyConfiguration(new SeatConfiguration());
+            builder.ApplyConfiguration(new GenreConfiguration());
+            builder.ApplyConfiguration(new MovieConfiguration());
+
+
             builder.Entity<ProjectionSeat>()
                 .HasOne(r => r.Reservation)
                 .WithMany()
@@ -25,24 +28,14 @@ namespace Cinema.Infrastructure.Data
                 .HasOne(p => p.Projection)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
-                
-                
-
-
-            builder.Entity<ActorMovie>()
-                .HasKey(am => new { am.ActorId, am.MovieId });
-
-                  
-
-
-
+  
             base.OnModelCreating(builder);
         }
 
 
-        public DbSet<Actor> Actors { get; set; } = null!;
+        
 
-        public DbSet<ActorMovie> ActorsMovies { get; set; } = null!;
+        
 
         public DbSet<Genre> Genres { get; set; } = null!;
 
