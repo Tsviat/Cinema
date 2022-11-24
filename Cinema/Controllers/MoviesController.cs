@@ -23,7 +23,7 @@ namespace Cinema.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Details(int movieId) 
         {
             var model = await movieService.GetMovieDetails(movieId);

@@ -117,10 +117,11 @@ namespace Cinema.Core.Services
 
         public async Task<MovieViewModel> GetMovieDetails(int movieId)
         {
-            return await repo.AllReadonly<Movie>()
+            var model = await repo.AllReadonly<Movie>()
                 .Where(m => m.Id == movieId)
                 .Select(m => new MovieViewModel()
                 {
+                    Id = m.Id,
                     Title = m.Title,
                     Director = m.Director,
                     Description = m.Description,
@@ -131,6 +132,8 @@ namespace Cinema.Core.Services
 
                 })
                 .FirstAsync();
+
+            return model;
 
         }
 
