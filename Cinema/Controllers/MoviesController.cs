@@ -1,12 +1,17 @@
 ﻿using Cinema.Core.Contracts;
-using Cinema.Core.Models.Movies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Controllers
 {
     public class MoviesController : Controller
     {
-       
+
+        public IActionResult AllMovies()
+        {
+            
+             return RedirectToAction("All", "Movies");
+            
+        }
 
         private readonly IMovieService movieService;
 
@@ -31,16 +36,16 @@ namespace Cinema.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Add()
-        {
-            var model = new AddMovieViewModel()
-            {
-                Genres = await movieService.GetGenresAsync()
-            };
+        //[HttpGet]
+        //public async Task<IActionResult> Add()
+        //{
+        //    var model = new AddMovieViewModel()
+        //    {
+        //        Genres = await movieService.GetGenresAsync()
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         //[HttpPost]
         //public async Task<IActionResult> Add(AddMovieViewModel model)

@@ -17,20 +17,22 @@ namespace Cinema.Core.Services
             repo = _repo;
         }
 
-        //public async Task AddMovieAsync(AddMovieViewModel model)
-        //{
-        //    var entity = new Movie()
-        //    {
-        //        Director = model.Director,
-        //        Title = model.Title,
-        //        GenreId = model.GenreId,
-        //        ImageUrl = model.ImageUrl,
-        //        Rating = model.Rating
-        //    };
+        public async Task AddMovieAsync(AddMovieViewModel model)
+        {
+            var entity = new Movie()
+            {
+                Director = model.Director,
+                Title = model.Title,
+                Description = model.Description,
+                ReleaseDate = model.ReleaseDate,
+                GenreId = model.GenreId,
+                ImageURL = model.ImageUrl,
+                Rating = model.Rating
+            };
 
-        //    await context.Movies.AddAsync(entity);
-        //    await context.SaveChangesAsync();
-        //}
+            await repo.AddAsync<Movie>(entity);
+            await repo.SaveChangesAsync();
+        }
 
         //public async Task AddMovieToCollectionAsync(int movieId, string userId)
         //{

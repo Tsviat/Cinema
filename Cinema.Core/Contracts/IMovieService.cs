@@ -11,7 +11,7 @@ namespace Cinema.Core.Contracts
 
         Task<MovieViewModel> GetMovieDetails(int movieId);
 
-        //Task AddMovieAsync(AddMovieViewModel model);
+        Task AddMovieAsync(AddMovieViewModel model);
 
         //Task AddMovieToCollectionAsync(int movieId, string userId);
 

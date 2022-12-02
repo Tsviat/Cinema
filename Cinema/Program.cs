@@ -31,8 +31,12 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.LoginPath = "/User/Logout";
 });
 
+builder.Services.AddScoped<IProjectionService, ProjectionService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IRepository, Repository>();
+
+//builder.Services.AddDefaultIdentity<ApplicationUser>()
+//    .AddRoles<IdentityRole>();
 
 var app = builder.Build();
 
@@ -56,8 +60,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
 app.MapRazorPages();
 
 app.Run();

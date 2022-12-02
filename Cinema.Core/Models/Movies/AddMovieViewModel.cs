@@ -14,6 +14,12 @@ namespace Cinema.Core.Models.Movies
         public string Director { get; set; } = null!;
 
         [Required]
+        [StringLength(1000)]
+        public string Description { get; set; } = null!;
+
+        public int ReleaseDate { get; set; }
+
+        [Required]
         public string ImageUrl { get; set; } = null!;
 
         [Required]
@@ -22,6 +28,7 @@ namespace Cinema.Core.Models.Movies
 
         [Required]
         public int GenreId { get; set; }
-        public IEnumerable<Genre> Genres { get; set; } = null!;
+
+        public IEnumerable<Genre> Genres { get; set; } = new List<Genre>();
     }
 }

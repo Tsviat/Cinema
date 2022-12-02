@@ -32,15 +32,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\" />
+    <None Include="Views\Movies\All.cshtml" />
+    <None Include="Views\Movies\Mine.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Movies\Add.cshtml" />
-    <None Include="Views\Movies\All.cshtml" />
-    <None Include="Views\Movies\Mine.cshtml" />
+    <Folder Include="Areas\Adminisration\Data\" />
+    <Folder Include="Areas\Adminisration\Models\" />
+    <Folder Include="Areas\Adminisration\Views\Movies\" />
+    <Folder Include="Areas\Adminisration\Views\Projection\" />
   </ItemGroup>
 
 </Project>
